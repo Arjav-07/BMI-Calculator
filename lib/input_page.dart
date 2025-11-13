@@ -24,6 +24,7 @@ class _InputPageState extends State<InputPage> {
         backgroundColor: Theme.of(context).primaryColor,
       ),
       body: Column(
+        
         children: <Widget>[
           Expanded(
             child: Row(
@@ -41,14 +42,14 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Expanded(child: ReusableCard( color: cardcolor, cardChild: null,),),
+          Expanded(child: ReusableCard( color: cardcolor, cardChild: SizedBox(),),),
           Expanded(child: Row(
             children: <Widget>[
               Expanded(
-                child: ReusableCard(color: cardcolor, cardChild: null,)
+                child: ReusableCard(color: cardcolor, cardChild: SizedBox(),)
               ),
               Expanded(
-                child: ReusableCard(color: cardcolor, cardChild: null,),
+                child: ReusableCard(color: cardcolor, cardChild: SizedBox(),),
               ),
             ],
           ),),
