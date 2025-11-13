@@ -7,9 +7,36 @@ class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
 }
-  Color cardcolor = Color(0xFF1D1E33);
+  Color activecardcolor = Color(0xFF1D1E33);
+  Color inactivecardcolor = Color(0xFF111328);
 
+enum Gender {
+  male,female,
+}
 class _InputPageState extends State<InputPage> {
+
+  Color maleCardColor = inactivecardcolor;
+  Color femaleCardColor = inactivecardcolor;
+
+  void updateColor(Gender selectedGender) {
+    if (selectedGender == Gender.male) {
+      if (maleCardColor == inactivecardcolor) {
+        maleCardColor = activecardcolor;
+        femaleCardColor = inactivecardcolor;
+      } else {
+        maleCardColor = inactivecardcolor;
+      }
+    }
+    if (selectedGender == Gender.female) {
+      if (femaleCardColor == inactivecardcolor) {
+        femaleCardColor = activecardcolor;
+        maleCardColor = inactivecardcolor;
+      } else {
+        femaleCardColor = inactivecardcolor;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,25 +58,36 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
 
-                  child: ReusableCard(color: cardcolor,cardChild: IconWidget(icon: FontAwesomeIcons.mars, label: "MALE"),),
+                  child: GestureDetector(onTap: () {
+                    setState(() {
+                      updateColor(Gender.male);
+                    });
+                  },
+                    child: ReusableCard(color: maleCardColor,cardChild: IconWidget(icon: FontAwesomeIcons.mars, label: "MALE"),)),
 
                 ),
                 Expanded(
-                  child: ReusableCard(color: cardcolor,cardChild: 
-                  IconWidget(icon: FontAwesomeIcons.venus, label: "FEMALE"),
+                  child: GestureDetector(onTap: () {
+                    setState(() {
+                      updateColor(Gender.female);
+                    });
+                  },
+                    child: ReusableCard(color: femaleCardColor,cardChild: 
+                    IconWidget(icon: FontAwesomeIcons.venus, label: "FEMALE"),
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          Expanded(child: ReusableCard( color: cardcolor, cardChild: SizedBox(),),),
+          Expanded(child: ReusableCard( color: activecardcolor, cardChild: SizedBox(),),),
           Expanded(child: Row(
             children: <Widget>[
               Expanded(
-                child: ReusableCard(color: cardcolor, cardChild: SizedBox(),)
+                child: ReusableCard(color: activecardcolor, cardChild: SizedBox(),)
               ),
               Expanded(
-                child: ReusableCard(color: cardcolor, cardChild: SizedBox(),),
+                child: ReusableCard(color: activecardcolor, cardChild: SizedBox(),),
               ),
             ],
           ),),
