@@ -1,8 +1,7 @@
-import 'package:bmi_calculator/components/bottom_button.dart';
-import 'package:bmi_calculator/constants.dart';
 import 'package:bmi_calculator/components/icon_widget.dart';
 import 'package:bmi_calculator/components/reusablecard.dart';
 import 'package:bmi_calculator/components/rounded_icon_button.dart';
+import 'package:bmi_calculator/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -22,9 +21,9 @@ class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 0, // Optional: removes shadow
         title: Text(
           'BMI CALCULATOR',
           style: TextStyle(fontWeight: FontWeight.bold,
@@ -139,25 +138,19 @@ class _InputPageState extends State<InputPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            RoundedIconButton(
-                              icon: Icons.remove,
-                              onPressed: () {
-                                setState(() {
-                                  weight--;
-                                });
-                              },
-                            ),
+                            RoundedIconButton(icon: Icons.remove, onPressed: () {
+                              setState(() {
+                                weight--;
+                              });
+                            },),
 
                             SizedBox(width: 10.0),
 
-                            RoundedIconButton(
-                              icon: Icons.add,
-                              onPressed: () {
-                                setState(() {
-                                  weight++;
-                                });
-                              },
-                            ),
+                            RoundedIconButton(icon: Icons.add, onPressed: () {
+                              setState(() {
+                                weight++;
+                              });
+                            },),
                           ],
                         ),
                       ],
@@ -178,25 +171,19 @@ class _InputPageState extends State<InputPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            RoundedIconButton(
-                              icon: Icons.remove,
-                              onPressed: () {
-                                setState(() {
-                                  age--;
-                                });
-                              },
-                            ),
+                            RoundedIconButton(icon: Icons.remove, onPressed: () {
+                              setState(() {
+                                age--;
+                              });
+                            },),
 
                             SizedBox(width: 10.0),
 
-                            RoundedIconButton(
-                              icon: Icons.add,
-                              onPressed: () {
-                                setState(() {
-                                  age++;
-                                });
-                              },
-                            ),
+                            RoundedIconButton(icon: Icons.add, onPressed: () {
+                              setState(() {
+                                age++;
+                              });
+                            },),
                           ],
                         ),
                       ],
@@ -209,11 +196,28 @@ class _InputPageState extends State<InputPage> {
           ),
 
           // ------------------ CALCULATE BUTTON ------------------
-          BottomButton(onTap: (){
-            Navigator.pushNamed(context, '/results');
-          }, buttonTitle: 'CALCULATE',),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/results');
+              // Calculate BMI and navigate to results page
+            },
+            child: Container(
+              color: kbottomcolor,
+              margin: EdgeInsets.only(top: 10.0),
+              padding: EdgeInsets.only(bottom: 10.0),
+              width: double.infinity,
+              height: kbottomcontainerheight,
+              child: Center(
+                child: Text(
+                  'CALCULATE',
+                  style: kLargeButtonTextStyle,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
   }
 }
+
