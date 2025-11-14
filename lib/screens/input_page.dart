@@ -1,6 +1,8 @@
+import 'package:bmi_calculator/components/bottom_button.dart';
 import 'package:bmi_calculator/constants.dart';
-import 'package:bmi_calculator/icon_widget.dart';
-import 'package:bmi_calculator/reusablecard.dart';
+import 'package:bmi_calculator/components/icon_widget.dart';
+import 'package:bmi_calculator/components/reusablecard.dart';
+import 'package:bmi_calculator/components/rounded_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -20,11 +22,12 @@ class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 0, // Optional: removes shadow
         title: Text(
           'BMI CALCULATOR',
-          style: TextStyle(
+          style: TextStyle(fontWeight: FontWeight.bold,
             color: Theme.of(context).textTheme.bodyMedium?.color,
           ),
         ),
@@ -136,19 +139,25 @@ class _InputPageState extends State<InputPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            RoundedIconButton(icon: Icons.remove, onPressed: () {
-                              setState(() {
-                                weight--;
-                              });
-                            },),
+                            RoundedIconButton(
+                              icon: Icons.remove,
+                              onPressed: () {
+                                setState(() {
+                                  weight--;
+                                });
+                              },
+                            ),
 
                             SizedBox(width: 10.0),
 
-                            RoundedIconButton(icon: Icons.add, onPressed: () {
-                              setState(() {
-                                weight++;
-                              });
-                            },),
+                            RoundedIconButton(
+                              icon: Icons.add,
+                              onPressed: () {
+                                setState(() {
+                                  weight++;
+                                });
+                              },
+                            ),
                           ],
                         ),
                       ],
@@ -169,19 +178,25 @@ class _InputPageState extends State<InputPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            RoundedIconButton(icon: Icons.remove, onPressed: () {
-                              setState(() {
-                                age--;
-                              });
-                            },),
+                            RoundedIconButton(
+                              icon: Icons.remove,
+                              onPressed: () {
+                                setState(() {
+                                  age--;
+                                });
+                              },
+                            ),
 
                             SizedBox(width: 10.0),
 
-                            RoundedIconButton(icon: Icons.add, onPressed: () {
-                              setState(() {
-                                age++;
-                              });
-                            },),
+                            RoundedIconButton(
+                              icon: Icons.add,
+                              onPressed: () {
+                                setState(() {
+                                  age++;
+                                });
+                              },
+                            ),
                           ],
                         ),
                       ],
@@ -194,37 +209,11 @@ class _InputPageState extends State<InputPage> {
           ),
 
           // ------------------ CALCULATE BUTTON ------------------
-          Container(
-            alignment: Alignment.center,
-            color: kbottomcolor,
-            margin: EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: kbottomcontainerheight,
-            child: Text("CALCULATE", style: TextStyle(fontSize: 25.0), textAlign: TextAlign.center,),
-          ),
+          BottomButton(onTap: (){
+            Navigator.pushNamed(context, '/results');
+          }, buttonTitle: 'CALCULATE',),
         ],
       ),
-    );
-  }
-}
-
-class RoundedIconButton extends StatelessWidget {
-  const RoundedIconButton({super.key, required this.icon, required this.onPressed});
-
-final IconData icon;
-final Function onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(onPressed: () => onPressed(),
-      elevation: 0,
-      constraints: BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
-      ),
-      shape: CircleBorder(),
-      fillColor: Color(0xFF4C4F5E),
-      child: Icon(icon)
     );
   }
 }
