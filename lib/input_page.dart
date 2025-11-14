@@ -33,7 +33,6 @@ class _InputPageState extends State<InputPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-
           // ------------------ GENDER ------------------
           Expanded(
             child: Row(
@@ -81,37 +80,28 @@ class _InputPageState extends State<InputPage> {
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    'HEIGHT',
-                    style: klabelTextStyle,
-                  ),
+                  Text('HEIGHT', style: klabelTextStyle),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.baseline,
                     textBaseline: TextBaseline.alphabetic,
                     children: <Widget>[
-                      Text(
-                        height.toString(),
-                        style: knumberTextStyle,
-                      ),
-                      Text(
-                        'cm',
-                        style: klabelTextStyle,
-                      ),
+                      Text(height.toString(), style: knumberTextStyle),
+                      Text('cm', style: klabelTextStyle),
                     ],
                   ),
                   SliderTheme(
                     data: SliderTheme.of(context).copyWith(
-                       activeTrackColor: Colors.white,
-                       inactiveTrackColor: Color(0xFF8D8E98),
+                      activeTrackColor: Colors.white,
+                      inactiveTrackColor: Color(0xFF8D8E98),
                       thumbColor: Color(0xFFEB1555),
                       overlayColor: Color(0x29EB1555),
-                      thumbShape:
-                          RoundSliderThumbShape(enabledThumbRadius: 15.0),
-                      overlayShape:
-                          RoundSliderOverlayShape(overlayRadius: 30.0),
-                         
-                      
+                      thumbShape: RoundSliderThumbShape(
+                        enabledThumbRadius: 15.0,
+                      ),
+                      overlayShape: RoundSliderOverlayShape(
+                        overlayRadius: 30.0,
+                      ),
                     ),
                     child: Slider(
                       value: height.toDouble(),
@@ -141,11 +131,26 @@ class _InputPageState extends State<InputPage> {
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text(
-                          'WEIGHT',
-                          style: klabelTextStyle,
+                        Text('WEIGHT', style: klabelTextStyle),
+                        Text(weight.toString(), style: knumberTextStyle),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundedIconButton(icon: Icons.remove, onPressed: () {
+                              setState(() {
+                                weight--;
+                              });
+                            },),
+
+                            SizedBox(width: 10.0),
+
+                            RoundedIconButton(icon: Icons.add, onPressed: () {
+                              setState(() {
+                                weight++;
+                              });
+                            },),
+                          ],
                         ),
-                        Text(weight.toString(), style: knumberTextStyle,),
                       ],
                     ),
                     onPress: () {},
@@ -156,7 +161,31 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: ReusableCard(
                     color: kactivecardcolor,
-                    cardChild: Column(),
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text('AGE', style: klabelTextStyle),
+                        Text(age.toString(), style: knumberTextStyle),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundedIconButton(icon: Icons.remove, onPressed: () {
+                              setState(() {
+                                age--;
+                              });
+                            },),
+
+                            SizedBox(width: 10.0),
+
+                            RoundedIconButton(icon: Icons.add, onPressed: () {
+                              setState(() {
+                                age++;
+                              });
+                            },),
+                          ],
+                        ),
+                      ],
+                    ),
                     onPress: () {},
                   ),
                 ),
@@ -166,11 +195,12 @@ class _InputPageState extends State<InputPage> {
 
           // ------------------ CALCULATE BUTTON ------------------
           Container(
+            alignment: Alignment.center,
             color: kbottomcolor,
             margin: EdgeInsets.only(top: 10.0),
             width: double.infinity,
             height: kbottomcontainerheight,
-            
+            child: Text("CALCULATE", style: TextStyle(fontSize: 25.0), textAlign: TextAlign.center,),
           ),
         ],
       ),
@@ -179,11 +209,22 @@ class _InputPageState extends State<InputPage> {
 }
 
 class RoundedIconButton extends StatelessWidget {
-  const RoundedIconButton
-({super.key});
+  const RoundedIconButton({super.key, required this.icon, required this.onPressed});
+
+final IconData icon;
+final Function onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return RawMaterialButton(onPressed: () => onPressed(),
+      elevation: 0,
+      constraints: BoxConstraints.tightFor(
+        width: 56.0,
+        height: 56.0,
+      ),
+      shape: CircleBorder(),
+      fillColor: Color(0xFF4C4F5E),
+      child: Icon(icon)
+    );
   }
 }
